@@ -1,4 +1,5 @@
 package isep.com.rpg;
+//ffffff
 
 import com.isep.utils.InputParser;
 
