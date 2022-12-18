@@ -19,9 +19,10 @@ public abstract class Combatant {
         return name ;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name){
+        this.name = name ;
     }
+
 
     public int getHealthPoint() {
         return healthPoint ;

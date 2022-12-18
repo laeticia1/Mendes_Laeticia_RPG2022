@@ -2,6 +2,10 @@ package isep.com.rpg;
 
 public class Healer extends SpellCaster{
 
+    private int mana;
+
+    private int carePoints;
+
     @Override
     public int getMana(){
         return mana;
@@ -16,15 +20,10 @@ public class Healer extends SpellCaster{
         this.carePoints = carePoints;
     }
 
-    private int mana;
 
-
-    private int carePoints;
-
-    public Healer(String name, int mana, int carePoints ) {
-        super(name,5, 0);
+    public Healer(String name, int mana ) {
+        super(name,5, 2);
         this.mana = mana;
-        this.carePoints = carePoints;
 
     }
 
@@ -50,7 +49,4 @@ public class Healer extends SpellCaster{
         }
     }
 
-    public Weapon getWeapon(){
-        return null;
-    }
 }

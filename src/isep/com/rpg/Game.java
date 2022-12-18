@@ -1,7 +1,5 @@
 package isep.com.rpg;
 
-import com.isep.utils.InputParser;
-
 import java.util.*;
 
 public class Game {
@@ -41,7 +39,7 @@ public class Game {
                         if(arme == 1){
                             Weapon epee = new Weapon("Epee", 4);
                             heros.get(i).take(epee);
-                            System.out.println("Vous venez de choisir " + heros.get(i) + " avec l'arme " + epee);
+                            System.out.println("Vous venez de choisir " + heros.get(i) + " avec l'arme " + epee );
                         }
                         if(arme == 2){
                             Weapon poignard = new Weapon("Poignard", 2);
@@ -50,9 +48,10 @@ public class Game {
                         }
                         break;
                     case 2 :
-                      displayMessage("Le Healer jette des sorts et il peut soigner son équipe avec des sorts ");
-                      Weapon sort = new Weapon("Sort", 4);
-                      heros.get(i).take(sort);
+                        heros.add(new Healer(nom, 5));
+                        displayMessage("Le Healer jette des sorts et il peut soigner son équipe avec des sorts ");
+                        //Weapon sort = new Weapon("Sort", 4);
+                        //heros.get(i).take(sort);
                         break;
                     case 3 :
                         heros.add(new Mage(nom,10));
@@ -103,6 +102,14 @@ public class Game {
         System.out.println("Voici la composition de vos enemies : "+ enemies);
         System.out.println (Separator(30));
 
+        Warrior sofiane = new Warrior("pop", 6, 3);
+        Weapon couteau = new Weapon("couteau", 3);
+        System.out.println(couteau.getDamagePoints());
+        sofiane.take(couteau);
+        Warrior pepito = new Warrior("mom", 10, 3);
+        sofiane.fight(pepito);
+        System.out.println("Test" + pepito.getHealthPoint());
+
         start();
 
     }
@@ -125,12 +132,12 @@ public class Game {
             if (premierattaquant == 1) System.out.println("Les héros commencent le combat");
 
             ixHero = ac.oInt("Quel héros souhaitez-vous sélectionner dans la liste (saisir sa position)" + heros, 5);
-            scanner.nextInt();
 
             Combatant goodOne = heros.get(ixHero - 1);
             Combatant badOne = enemies.get(0);
 
-            int choix = ac.oInt("Vous avez le choix entre : \n\t[1] Attaquer \n\t[2] Défendre \n\t[3] Prendre une potion ", 3);
+            int choix = ac.oInt("Vous avez le choix entre : \n\t[1] Attaquer (ou soigner si vous possedez un Healer)\n\t[2] Défendre \n\t[3] Prendre une potion \n\t[4] Soigner un héros (seulement pour un Healer)", 4);
+
             switch (choix) {
 
                 case 1:
@@ -138,53 +145,54 @@ public class Game {
                 switch (premierattaquant) {
 
                     case 0:
-                        // Attaque de l'ennemi
-                        displayMessage("Le méchant " + badOne.getName()
-                                + " attaque le gentil " + goodOne.getName() + "...");
-                        badOne.fight(goodOne);
-                        if (goodOne.getHealthPoint() <= 0) {
-                            displayMessage("Le pauvre " + goodOne.getName() + " a été vaincu...");
-                            heros.remove(ixHero - 1);
-                            ixHero--; // Correction: évite que le suivant perde son tour
-                        } else {
-
-                            //Riposte du gentil
-                            displayMessage(" Le gentil " + goodOne.getName() + " attaque le méchant " + badOne.getName() + "...");
-                            goodOne.fight(badOne);
-                            if (badOne.getHealthPoint() <= 0) {
-                                displayMessage("Bravo, " + goodOne.getName()
-                                        + " a vaincu " + badOne.getName() + " !!!");
-                                enemies.remove(0);
-                                recompense(heros);
-                            }
-                        }
-                        break;
-
-                    case 1:
-                        //Les héros commencent
-                        // Attaque du gentil
-                        displayMessage("Le gentil " + goodOne.getName()
-                                + " attaque le méchant " + badOne.getName() + "...");
-                        goodOne.fight(badOne);
-                        if (badOne.getHealthPoint() <= 0) {
-                            displayMessage("Bravo, " + goodOne.getName()
-                                    + " a vaincu " + badOne.getName() + " !!!");
-                            enemies.remove(0);
-                            recompense(heros);
-                        } else {
-
-                            // Riposte du méchant, s'il n'est pas vaincu
+                            // Attaque de l'ennemi
                             displayMessage("Le méchant " + badOne.getName()
                                     + " attaque le gentil " + goodOne.getName() + "...");
                             badOne.fight(goodOne);
                             if (goodOne.getHealthPoint() <= 0) {
                                 displayMessage("Le pauvre " + goodOne.getName() + " a été vaincu...");
                                 heros.remove(ixHero - 1);
-                                ixHero--;
+                                ixHero--; // Correction: évite que le suivant perde son tour
+                            } else {
+                                //Riposte du gentil
+                                displayMessage(" Le gentil " + goodOne.getName() + " attaque le méchant " + badOne.getName() + "...");
+                                goodOne.fight(badOne);
+                                if (badOne.getHealthPoint() <= 0) {
+                                    displayMessage("Bravo, " + goodOne.getName()
+                                            + " a vaincu " + badOne.getName() + " !!!");
+                                    enemies.remove(0);
+                                    recompense(heros);
+                                }
                             }
-                        }
-                        break;
+                            break;
+
+                    case 1:
+
+                            //Les héros commencent
+                            // Attaque du gentil
+                            displayMessage("Le gentil " + goodOne.getName()
+                                    + " attaque le méchant " + badOne.getName() + "...");
+                            goodOne.fight(badOne);
+                            if (badOne.getHealthPoint() <= 0) {
+                                displayMessage("Bravo, " + goodOne.getName()
+                                        + " a vaincu " + badOne.getName() + " !!!");
+                                enemies.remove(0);
+                                recompense(heros);
+                            } else {
+
+                                // Riposte du méchant, s'il n'est pas vaincu
+                                displayMessage("Le méchant " + badOne.getName()
+                                        + " attaque le gentil " + goodOne.getName() + "...");
+                                badOne.fight(goodOne);
+                                if (goodOne.getHealthPoint() <= 0) {
+                                    displayMessage("Le pauvre " + goodOne.getName() + " a été vaincu...");
+                                    heros.remove(ixHero - 1);
+                                    ixHero--;
+                                }
+                            }
+                            break;
                 }
+                break;
 
                 case 2:
                     displayMessage("Je me protège de " + badOne.getName() + " et je perds seulement 2 points. ");
@@ -195,6 +203,18 @@ public class Game {
                     displayMessage(goodOne.getName() + " prend une potion. Il gagne 5 points de vie.");
                     goodOne.winLife(5);
                     break;
+
+                case 4:
+                        int heroPosition = ac.oInt("Quel héros souhaitez-vous soigner (saisir sa position) :" + heros, 5);
+                        heros.get(heroPosition-1).winLife(goodOne.getDegats());
+                        displayMessage("Votre héros " + heros.get(heroPosition-1) + " a récuperer " + goodOne.getDegats() + " points de vie. ");
+                        badOne.fight(goodOne);
+                        if (goodOne.getHealthPoint() <= 0) {
+                        displayMessage("Le pauvre " + goodOne.getName() + " a été vaincu...");
+                        heros.remove(ixHero - 1);
+                        ixHero--;
+                        }
+
             }
 
 
@@ -221,7 +241,6 @@ public class Game {
 
 
 
-    private InputParser inputParser;
     private List<Hero> heros;
     private List<Combatant> enemies;
 
