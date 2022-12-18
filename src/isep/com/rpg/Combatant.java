@@ -3,7 +3,7 @@ package isep.com.rpg;
 public abstract class Combatant {
 
     int degats;
-    private String name;
+    private final String name;
     public int healthPoint;
 
     int damagePoints;
@@ -16,10 +16,6 @@ public abstract class Combatant {
 
     public String getName() {
         return name ;
-    }
-
-    public void setName(String name){
-        this.name = name ;
     }
 
 
@@ -43,6 +39,5 @@ public abstract class Combatant {
 
     public void winDegats(int d) { degats += d; }
 
-    Potion potion = new Potion("Potion de vie", 5);
 
 }

@@ -5,7 +5,6 @@ import java.util.*;
 public class Game {
 
     private final AideConsole ac = new AideConsole();
-    private int mana;
     Potion potion = new Potion("Potion de vie", 5);
 
     public void game() {
@@ -100,8 +99,6 @@ public class Game {
         System.out.println("Voici la composition de vos enemies : "+ enemies);
         System.out.println (Separator(30));
 
-        Warrior sofiane = new Warrior("pop", 6, 3);
-        Weapon couteau = new Weapon("couteau", 1);
 
         start();
 
@@ -237,12 +234,6 @@ public class Game {
     private List<Hero> heros;
     private List<Combatant> enemies;
 
-
-    // Méthodes d'affichage
-    // (STATIQUES pour pouvoir les appeler depuis n'importe où dans le programme)
-    //
-    // => pourraient éventuellement être déplacées dans le package
-    //    "com.isep.utils", en s'inspirant de "com.isep.utils.InputParser" (méthodes de saisie)
 
     public static void displayStatus(List<Hero> h, List<Combatant> e) {
         System.out.println(Separator(30));
