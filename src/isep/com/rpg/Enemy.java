@@ -2,18 +2,31 @@ package isep.com.rpg;
 
 public abstract class Enemy extends Combatant {
 
+    String name;
+    int healthPoints;
+    int degats;
+
     public Enemy(String n, int hp, int d) {
-        super(n, 5, 2);
-        this.damagePoints = d;
+        name = n;
+        healthPoints = hp;
+        degats = d;
     }
 
-    public int getDamagePoints(){
-        return damagePoints;
+    public int getDegats(){
+        return degats;
     }
 
-    private final int damagePoints;
+    public int getHealthPoint() {
+        return healthPoints ;
+    }
+
+    public String getName() {
+        return name ;
+    }
 
     public String toString(){
         return this.getName();
     }
+
+
 }

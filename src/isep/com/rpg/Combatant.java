@@ -3,7 +3,6 @@ package isep.com.rpg;
 public abstract class Combatant {
 
     int degats;
-
     private String name;
     private int healthPoint;
 
@@ -11,6 +10,9 @@ public abstract class Combatant {
         name = n;
         healthPoint = hp;
         degats = d;
+    }
+
+    protected Combatant() {
     }
 
     public String getName() {
@@ -24,6 +26,8 @@ public abstract class Combatant {
     public int getHealthPoint() {
         return healthPoint ;
     }
+
+    public int getDegats() { return degats; }
 
     protected void loose(int hp) {
         healthPoint -= hp;

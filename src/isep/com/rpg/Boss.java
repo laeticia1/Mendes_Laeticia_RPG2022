@@ -9,7 +9,7 @@ public class Boss extends Enemy{
 
     @Override
     public void fight(Combatant combatant){
-        combatant.loose(getDamagePoints() );
+        combatant.loose(getDegats() );
     }
 
 }
