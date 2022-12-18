@@ -49,9 +49,7 @@ public class Game {
                         break;
                     case 2 :
                         heros.add(new Healer(nom, 5));
-                        displayMessage("Le Healer jette des sorts et il peut soigner son équipe avec des sorts ");
-                        //Weapon sort = new Weapon("Sort", 4);
-                        //heros.get(i).take(sort);
+                        displayMessage("Le Healer soigne son équipe avec des sorts ");
                         break;
                     case 3 :
                         heros.add(new Mage(nom,10));
@@ -103,12 +101,7 @@ public class Game {
         System.out.println (Separator(30));
 
         Warrior sofiane = new Warrior("pop", 6, 3);
-        Weapon couteau = new Weapon("couteau", 3);
-        System.out.println(couteau.getDamagePoints());
-        sofiane.take(couteau);
-        Warrior pepito = new Warrior("mom", 10, 3);
-        sofiane.fight(pepito);
-        System.out.println("Test" + pepito.getHealthPoint());
+        Weapon couteau = new Weapon("couteau", 1);
 
         start();
 
@@ -136,7 +129,7 @@ public class Game {
             Combatant goodOne = heros.get(ixHero - 1);
             Combatant badOne = enemies.get(0);
 
-            int choix = ac.oInt("Vous avez le choix entre : \n\t[1] Attaquer (ou soigner si vous possedez un Healer)\n\t[2] Défendre \n\t[3] Prendre une potion \n\t[4] Soigner un héros (seulement pour un Healer)", 4);
+            int choix = ac.oInt("Vous avez le choix entre : \n\t[1] Attaquer \n\t[2] Défendre \n\t[3] Prendre une potion \n\t[4] Soigner un héros (seulement pour un Healer)", 4);
 
             switch (choix) {
 
@@ -155,7 +148,7 @@ public class Game {
                                 ixHero--; // Correction: évite que le suivant perde son tour
                             } else {
                                 //Riposte du gentil
-                                displayMessage(" Le gentil " + goodOne.getName() + " attaque le méchant " + badOne.getName() + "...");
+                                displayMessage("Le gentil " + goodOne.getName() + " attaque le méchant " + badOne.getName() + "...");
                                 goodOne.fight(badOne);
                                 if (badOne.getHealthPoint() <= 0) {
                                     displayMessage("Bravo, " + goodOne.getName()
@@ -258,7 +251,7 @@ public class Game {
         }
         System.out.println();
         for (Combatant c: e) {
-            System.out.print(c.getName() + "(❤️= " + c.getHealthPoint() + ", ⚡️= " + c.getDegats() + ") ");
+            System.out.print(c.getName() + "(❤️= " + c.getHealthPoint() + ", ⚡️= " + c.getDamagePoints() + ") ");
         }
         System.out.println();
         System.out.println(Separator(30));
@@ -277,7 +270,7 @@ public class Game {
     }
 
     public static void recompense(List<Hero> heros){
-        displayMessage("Vous venez de remporter un combat : vous avez le choix entre les récomposes suivantes : \n\t[1] Augmenter la vie de vos héros \n\t (2) Augmenter les dégats d'un seul héros ");
+        displayMessage("Vous venez de remporter un combat : vous avez le choix entre les récomposes suivantes : \n\t[1] Augmenter la vie de vos héros \n\t[2] Augmenter les dégats d'un seul héros ");
         Scanner scanner = new Scanner(System.in);
         int choix_recompense = scanner.nextInt();
 
@@ -288,6 +281,7 @@ public class Game {
                     c.winLife(1);
                 }
                 displayMessage("Les vies de vos héros ont augmentées de 1. ");
+            break;
 
 
             case 2:
@@ -295,6 +289,7 @@ public class Game {
                 c.winDegats(1);
                 }
                 displayMessage("Les dégats de votre héros ont augmentés de 1.");
+            break;
         }
     }
 

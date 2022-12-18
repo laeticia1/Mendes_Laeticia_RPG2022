@@ -22,7 +22,7 @@ public class Healer extends SpellCaster{
 
 
     public Healer(String name, int mana ) {
-        super(name,5, 2);
+        super(name,6, 2);
         this.mana = mana;
 
     }

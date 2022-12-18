@@ -4,15 +4,14 @@ public abstract class Combatant {
 
     int degats;
     private String name;
-    private int healthPoint;
+    public int healthPoint;
+
+    int damagePoints;
 
     public Combatant(String n, int hp, int d) {
         name = n;
         healthPoint = hp;
         degats = d;
-    }
-
-    protected Combatant() {
     }
 
     public String getName() {
@@ -28,7 +27,9 @@ public abstract class Combatant {
         return healthPoint ;
     }
 
-    public int getDegats() { return degats; }
+    public int getDamagePoints() { return damagePoints; }
+
+    public int getDegats() {return degats; }
 
     protected void loose(int hp) {
         healthPoint -= hp;

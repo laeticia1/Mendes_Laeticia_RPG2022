@@ -9,7 +9,7 @@ public class Cyclope extends Enemy {
 
     @Override
     public void fight(Combatant combatant){
-        combatant.loose(getDegats() );
+        combatant.loose(getDamagePoints() );
     }
 
 }
